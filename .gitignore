@@ -52,3 +52,5 @@ Mkfile.old
 dkms.conf
 
 game
+.vscode
+.clang-format

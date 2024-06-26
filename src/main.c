@@ -1,15 +1,25 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <structs.h>
+#include "defs.h"
 
-void init_window(void){
-	if (SDL_Init(SDL_INIT_VIDEO) > 0) {
-		fprintf(stderr, "Error init SDL... \n");
-		exit(0);
+
+int main(int argc, char* argv[]) {
+	memset(&app, 0, sizeof(App));
+
+	initSDL();
+
+	// atexit(cleanup);
+
+	while (1) {
+		prepareScene();
+
+		doInput();
+
+		presentScene();
+
+		SDL_Delay(16);
 	}
-}
-
-int main(){
-	init_window();
 	// printf("this is the main");/
 	return 0;
 }
