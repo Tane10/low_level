@@ -1,4 +1,7 @@
 #include <SDL2/SDL_events.h>
+#include "input.h"
+
+
 void doInput(void) {
     SDL_Event event;
 

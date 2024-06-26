@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include <structs.h>
+
+#include "structs.h"
 #include "defs.h"
+#include "init.h"
+#include "draw.h"
+#include "input.h"
+
 
 
 int main(int argc, char* argv[]) {

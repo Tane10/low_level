@@ -1,4 +1,8 @@
+#ifndef APP_H
+#define APP_H
+
 #include <SDL2/SDL.h>
+
 
 typedef struct structs {
     SDL_Renderer* renderer;
@@ -6,7 +10,8 @@ typedef struct structs {
 
 } App;
 
-
+// Declare the global variable
 extern App app;
 
 
+#endif

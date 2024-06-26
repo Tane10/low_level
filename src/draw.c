@@ -1,7 +1,10 @@
-#include <structs.h>
+#include "structs.h"
+#include "draw.h"
 
 void prepareScene(void) {
-    SDL_SetRenderDrawColor(app.renderer, 99, 128, 255, 255);
+    // RGBA
+    // rgba(255, 197, 0, 1)
+    SDL_SetRenderDrawColor(app.renderer, 255, 197, 0, 255);
     SDL_RenderClear(app.renderer);
 }
 
