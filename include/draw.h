@@ -1,8 +1,8 @@
 #ifndef DRAW_H
 #define DRAW_H
 
-void prepareScene(void);
+void prepareScene(App* app);
 
-void presentScene(void);
+void presentScene(App* app);
 
 #endif

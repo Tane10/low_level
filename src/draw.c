@@ -1,13 +1,12 @@
 #include "structs.h"
 #include "draw.h"
 
-void prepareScene(void) {
+void prepareScene(App* app) {
     // RGBA
-    // rgba(255, 197, 0, 1)
-    SDL_SetRenderDrawColor(app.renderer, 255, 197, 0, 255);
-    SDL_RenderClear(app.renderer);
+    SDL_SetRenderDrawColor(app->renderer, 0, 98, 255, 255);
+    SDL_RenderClear(app->renderer);
 }
 
-void presentScene(void) {
-    SDL_RenderPresent(app.renderer);
+void presentScene(App* app) {
+    SDL_RenderPresent(app->renderer);
 }

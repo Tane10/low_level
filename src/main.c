@@ -8,23 +8,28 @@
 #include "input.h"
 
 
-
 int main(int argc, char* argv[]) {
+
+	App app;
 	memset(&app, 0, sizeof(App));
 
-	initSDL();
+	initSDL(&app);
 
 	// atexit(cleanup);
 
 	while (1) {
-		prepareScene();
+		prepareScene(&app);
 
 		doInput();
 
-		presentScene();
+		presentScene(&app);
 
 		SDL_Delay(16);
 	}
 	// printf("this is the main");/
+
+	SDL_DestroyRenderer(app.renderer);
+	SDL_DestroyWindow(app.window);
+	SDL_Quit();
 	return 0;
 }
