@@ -2,18 +2,11 @@
 #include <defs.h>
 #include <structs.h>
 #include <init.h>
-
-
-SDL_Texture* loadTexture(char* filename, App* app) {
-    SDL_Texture* texture;
-    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
-    texture = IMG_loadTexture(app->renderer, filename);
-
-    return texture;
-}
+#include <SDL2/SDL_image.h>
 
 
 void initSDL(App* app) {
+    IMG_Init(IMG_INIT_PNG);
     int rendererFlags, windowFlags;
 
     rendererFlags = SDL_RENDERER_ACCELERATED;
