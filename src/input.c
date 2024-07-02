@@ -1,5 +1,5 @@
-#include <SDL2/SDL_events.h>
 #include "input.h"
+#include <SDL2/SDL_events.h>
 
 
 void doInput(void) {
@@ -15,4 +15,5 @@ void doInput(void) {
             break;
         }
     }
+
 }
