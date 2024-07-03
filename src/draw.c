@@ -5,14 +5,14 @@
 
 
 
-void prepareScene(App* app) {
-    SDL_SetRenderDrawColor(app->renderer, 96, 128, 255, 255);
-    SDL_RenderClear(app->renderer);
+void prepareScene(SDL_Renderer* renderer) {
+    SDL_SetRenderDrawColor(renderer, 96, 128, 255, 255);
+    SDL_RenderClear(renderer);
 }
 
 
-void presentScene(App* app) {
-    SDL_RenderPresent(app->renderer);
+void presentScene(SDL_Renderer* renderer) {
+    SDL_RenderPresent(renderer);
 }
 
 SDL_Texture* loadTexture(char* filename, SDL_Renderer* renderer) {
@@ -22,16 +22,28 @@ SDL_Texture* loadTexture(char* filename, SDL_Renderer* renderer) {
 
     texture = IMG_LoadTexture(renderer, filename);
 
+    if (!texture) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to load texture %s: %s", filename, IMG_GetError());
+    }
+
     return texture;
 }
 
 void drawToScreen(SDL_Texture* texture, int x, int y, SDL_Renderer* renderer) {
     SDL_Rect dest;
 
+
     dest.x = x;
     dest.y = y;
-    SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.y);
 
-    SDL_RenderCopy(renderer, texture, NULL, &dest);
+
+    if (SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h) != 0) {
+        printf("Failed to get texture attrs: %s \n", SDL_GetError());
+    }
+
+    if (SDL_RenderCopy(renderer, texture, NULL, &dest) != 0) {
+        printf("Failed to display texture: %s \n", SDL_GetError());
+        // Failed to display texture: Invalid texture  ^
+    }
 
 }

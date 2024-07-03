@@ -6,7 +6,7 @@
 
 
 void initSDL(App* app) {
-    IMG_Init(IMG_INIT_PNG);
+    // IMG_Init(IMG_INIT_PNG);
 
     int renderFlags, windowFlags;
 
@@ -16,6 +16,12 @@ void initSDL(App* app) {
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Couldn't init SDL: %s \n", SDL_GetError());
+        exit(1);
+    }
+
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags)) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "IMG_Init Error: %s", IMG_GetError());
         exit(1);
     }
 
@@ -35,8 +41,4 @@ void initSDL(App* app) {
         exit(1);
     }
 
-    // if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
-    //     printf("Failed to initialize SDL_image: %s\n", IMG_GetError());
-    //     exit(1);
-    // }
 }

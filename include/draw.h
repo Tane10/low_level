@@ -5,9 +5,9 @@
 #define DRAW_H
 
 
-void prepareScene(App* app);
+void prepareScene(SDL_Renderer* renderer);
 
-void presentScene(App* app);
+void presentScene(SDL_Renderer* renderer);
 
 SDL_Texture* loadTexture(char* filename, SDL_Renderer* renderer);
 

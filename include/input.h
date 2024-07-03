@@ -1,9 +1,17 @@
+#include "structs.h"
+#include <SDL2/SDL_events.h>
+
 #ifndef INPUT_H
 #define INPUT_H
 
 
-void doInput(void);
+void doInput(App* app);
 
+void doKeyDown(SDL_KeyboardEvent* event, App* app);
+
+void doKeyUp(SDL_KeyboardEvent* event, App* app);
+
+void movement(Entity* entity, App* app);
 
 
 #endif
