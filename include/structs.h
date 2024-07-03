@@ -14,10 +14,11 @@ typedef struct {
 } App;
 
 typedef struct {
-    // int x;
-    // int y;
+    unsigned int id;
     SDL_Texture* texture;
     SDL_Rect* rect;
+    int speed;
+    int speedDt;
 } Entity;
 
 typedef struct {

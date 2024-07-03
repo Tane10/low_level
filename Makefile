@@ -7,4 +7,7 @@ run:
 clean:
 	rm game
 
+debug:
+	gdb ./game
+
 	

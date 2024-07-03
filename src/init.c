@@ -43,8 +43,8 @@ void initSDL(App* app) {
         exit(1);
     }
 
-    if (!TTF_Init()) {
-        printf("Failed to create renderer: %s \n", SDL_GetError());
+    if (TTF_Init() != 0) {
+        printf("Failed to create TTF: %s \n", SDL_GetError());
         exit(1);
     }
 
