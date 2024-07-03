@@ -29,21 +29,19 @@ SDL_Texture* loadTexture(char* filename, SDL_Renderer* renderer) {
     return texture;
 }
 
-void drawToScreen(SDL_Texture* texture, int x, int y, SDL_Renderer* renderer) {
-    SDL_Rect dest;
+void drawToScreen(SDL_Texture* texture, SDL_Rect* rect, SDL_Renderer* renderer) {
 
-
-    dest.x = x;
-    dest.y = y;
-
-
-    if (SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h) != 0) {
+    if (SDL_QueryTexture(texture, NULL, NULL, &rect->w, &rect->h) != 0) {
         printf("Failed to get texture attrs: %s \n", SDL_GetError());
     }
 
-    if (SDL_RenderCopy(renderer, texture, NULL, &dest) != 0) {
+    if (SDL_RenderCopy(renderer, texture, NULL, rect) != 0) {
         printf("Failed to display texture: %s \n", SDL_GetError());
         // Failed to display texture: Invalid texture  ^
     }
+
+    // Draw hit box around png
+    // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    // SDL_RenderDrawRect(renderer, &dest);
 
 }

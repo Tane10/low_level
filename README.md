@@ -13,3 +13,6 @@ Storage: Small footprint (Doom's original installation size was around 2.39 MB).
 
 
 compilation code => gcc -Wall -std=c99 ./src/*.c -o game
+
+
+https://hexadecimalwtf.itch.io/space-pixels => assets

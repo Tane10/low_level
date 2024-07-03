@@ -83,22 +83,3 @@ void doInput(App* app) {
 
 }
 
-void movement(Entity* entity, App* app) {
-
-    if (app->up) {
-        entity->y -= 4;
-    }
-
-    if (app->down) {
-        entity->y += 4;
-    }
-
-    if (app->right) {
-        entity->x += 4;
-    }
-
-    if (app->left) {
-        entity->x -= 4;
-    }
-
-}

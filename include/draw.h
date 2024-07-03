@@ -11,6 +11,7 @@ void presentScene(SDL_Renderer* renderer);
 
 SDL_Texture* loadTexture(char* filename, SDL_Renderer* renderer);
 
-void drawToScreen(SDL_Texture* texture, int x, int y, SDL_Renderer* renderer);
+void drawToScreen(SDL_Texture* texture, SDL_Rect* rect, SDL_Renderer* renderer);
+
 
 #endif

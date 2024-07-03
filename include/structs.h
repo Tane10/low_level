@@ -14,9 +14,17 @@ typedef struct {
 } App;
 
 typedef struct {
-    int x;
-    int y;
+    // int x;
+    // int y;
     SDL_Texture* texture;
+    SDL_Rect* rect;
 } Entity;
+
+typedef struct {
+    int top;
+    int bottom;
+    int right;
+    int left;
+} CollisionMap;
 
 #endif
