@@ -2,7 +2,6 @@
 #include <structs.h>
 #include <SDL2/SDL_log.h>
 
-
 CollisionMap* hasCollidedWithBorder(SDL_Window* window, SDL_Rect* entityRect) {
     int windowW, windowH;
 

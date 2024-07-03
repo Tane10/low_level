@@ -1,7 +1,9 @@
 #include "init.h"
+#include "defs.h"
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "defs.h"
+#include <SDL2/SDL_ttf.h>
 
 
 
@@ -37,6 +39,11 @@ void initSDL(App* app) {
     app->renderer = SDL_CreateRenderer(app->window, -1, renderFlags);
 
     if (!app->renderer) {
+        printf("Failed to create renderer: %s \n", SDL_GetError());
+        exit(1);
+    }
+
+    if (!TTF_Init()) {
         printf("Failed to create renderer: %s \n", SDL_GetError());
         exit(1);
     }

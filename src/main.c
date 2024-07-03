@@ -6,6 +6,7 @@
 #include "movement.h"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 int main(int argc, char* argv[]) {
     App app;
@@ -30,6 +31,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    // SDL_Surface* screenSurface = SDL_createSu
 
     while (1) {
 
@@ -46,7 +48,15 @@ int main(int argc, char* argv[]) {
         SDL_Delay(16);
     }
 
+
+    // clean u
+    SDL_DestroyTexture(player.texture);
     free(&player);
+    SDL_DestroyRenderer(app.renderer);
+    SDL_DestroyWindow(app.window);
+    TTF_Quit();
+    SDL_Quit();
+
 
     return 0;
 }
