@@ -5,7 +5,6 @@
 #include "structs.h"
 #include "movement.h"
 #include "text.h"
-#include "entityManager.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -13,7 +12,7 @@
 
 void cleanUp(Entity* ent, SDL_Window* window, SDL_Renderer* ren) {
     SDL_DestroyTexture(ent->texture);
-    destroyEntity(ent);
+    free(ent);
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(window);
     TTF_Quit();
@@ -22,24 +21,35 @@ void cleanUp(Entity* ent, SDL_Window* window, SDL_Renderer* ren) {
 
 int main(int argc, char* argv[]) {
     App app;
+    Entity player;
+    SDL_Rect rect;
 
     memset(&app, 0, sizeof(App));
 
     initSDL(&app);
 
-    Entity* player = buildEntity("assets/pixel_ship.png", app.renderer);
+    // init player
+    memset(&player, 0, sizeof(Entity));
+    player.rect = &rect;
+    player.rect->x = 100;
+    player.rect->y = 100;
+    player.rect->w = 50;
+    player.rect->h = 50;
+    player.speed = 4;
+
+    player.texture = loadTexture("assets/pixel_ship.png", app.renderer);
 
 
     while (1) {
 
         prepareScene(app.renderer);
 
-        doInput(&app);
+        doInput(&app, &player);
 
-        //movement(&app, player->rect);
+        movement(&app, player.rect, &(player.speed));
 
         drawText(app.renderer);
-        drawToScreen(player->texture, player->rect, app.renderer);
+        drawToScreen(player.texture, player.rect, app.renderer);
 
         presentScene(app.renderer);
 
@@ -47,7 +57,7 @@ int main(int argc, char* argv[]) {
     }
 
 
-    cleanUp(player, app.window, app.renderer);
+    cleanUp(&player, app.window, app.renderer);
 
 
     return 0;

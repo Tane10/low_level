@@ -43,31 +43,32 @@ CollisionMap* hasCollidedWithBorder(SDL_Window* window, SDL_Rect* entityRect) {
 
 
 
-void movement(App* app, SDL_Rect* entityRect) {
+void movement(App* app, SDL_Rect* entityRect, int* speed) {
 
     CollisionMap* collided = hasCollidedWithBorder(app->window, entityRect);
 
+
     if (app->up) {
         if (!collided->top) {
-            entityRect->y -= 4;
+            entityRect->y -= *speed;
         }
     }
 
     if (app->down) {
         if (!collided->bottom) {
-            entityRect->y += 4;
+            entityRect->y += *speed;
         }
     }
 
     if (app->right) {
         if (!collided->right) {
-            entityRect->x += 4;
+            entityRect->x += *speed;
         }
     }
 
     if (app->left) {
         if (!collided->left) {
-            entityRect->x -= 4;
+            entityRect->x -= *speed;
         }
     }
 

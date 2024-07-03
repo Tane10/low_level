@@ -9,7 +9,7 @@ void drawText(SDL_Renderer* ren) {
     // SDL_Color bgColor = { 160,  32,  240 };
 
     TTF_Font* font = TTF_OpenFont("assets/ARIAL.TTF", 20);
-    char* text = "Arrows Keys for movement // b button boost  // Space for shoot";
+    char* text = "Arrows Keys for movement // Hold B for boost  // Space for shoot";
 
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, text, colour);
 

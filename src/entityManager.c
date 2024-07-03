@@ -17,6 +17,7 @@ Entity* buildEntity(char* texture, SDL_Renderer* ren) {
     SDL_Rect rect;
 
     Entity* npc = malloc(sizeof(Entity));
+    memset(npc, 0, sizeof(Entity));
 
     npc->rect = &rect;
     npc->rect->x = 100;

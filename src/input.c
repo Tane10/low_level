@@ -1,8 +1,11 @@
 #include "input.h"
+#include "structs.h"
+
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_log.h>
 
 
-void doKeyDown(SDL_KeyboardEvent* event, App* app) {
+void doKeyDown(SDL_KeyboardEvent* event, App* app, int* speed) {
     if (event->repeat == 0) {
         switch (event->keysym.scancode) {
         case SDL_SCANCODE_UP:
@@ -21,6 +24,10 @@ void doKeyDown(SDL_KeyboardEvent* event, App* app) {
             app->left = 1;
             break;
 
+        case SDL_SCANCODE_B:
+            *speed = 10;
+            break;
+
         default:
             break;
 
@@ -30,7 +37,7 @@ void doKeyDown(SDL_KeyboardEvent* event, App* app) {
 
 }
 
-void doKeyUp(SDL_KeyboardEvent* event, App* app) {
+void doKeyUp(SDL_KeyboardEvent* event, App* app, int* speed) {
     if (event->repeat == 0) {
         switch (event->keysym.scancode) {
         case SDL_SCANCODE_UP:
@@ -49,6 +56,10 @@ void doKeyUp(SDL_KeyboardEvent* event, App* app) {
             app->left = 0;
             break;
 
+        case SDL_SCANCODE_B:
+            *speed = 4;
+            break;
+
         default:
             break;
 
@@ -59,7 +70,7 @@ void doKeyUp(SDL_KeyboardEvent* event, App* app) {
 }
 
 
-void doInput(App* app) {
+void doInput(App* app, Entity* entity) {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
@@ -69,11 +80,11 @@ void doInput(App* app) {
             break;
 
         case SDL_KEYDOWN:
-            doKeyDown(&event.key, app);
+            doKeyDown(&event.key, app, &(entity->speed));
             break;
 
         case SDL_KEYUP:
-            doKeyUp(&event.key, app);
+            doKeyUp(&event.key, app, &(entity->speed));
             break;
 
         default:

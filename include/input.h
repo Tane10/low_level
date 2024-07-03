@@ -5,11 +5,11 @@
 #define INPUT_H
 
 
-void doInput(App* app);
+void doInput(App* app, Entity* entity);
 
-void doKeyDown(SDL_KeyboardEvent* event, App* app);
+void doKeyDown(SDL_KeyboardEvent* event, App* app, int* speed);
 
-void doKeyUp(SDL_KeyboardEvent* event, App* app);
+void doKeyUp(SDL_KeyboardEvent* event, App* app, int* speed);
 
 
 #endif
