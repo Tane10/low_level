@@ -9,6 +9,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_video.h>
+#include <defs.h>
 
 void cleanUp(Entity* ent, SDL_Window* window, SDL_Renderer* ren) {
     SDL_DestroyTexture(ent->texture);
@@ -19,10 +20,17 @@ void cleanUp(Entity* ent, SDL_Window* window, SDL_Renderer* ren) {
     SDL_Quit();
 }
 
+
 int main(int argc, char* argv[]) {
     App app;
+
     Entity player;
+    Entity bullet;
+
     SDL_Rect rect;
+    SDL_Rect rectB;
+
+    //TODO: Clean up this entity stuff 
 
     memset(&app, 0, sizeof(App));
 
@@ -39,17 +47,48 @@ int main(int argc, char* argv[]) {
 
     player.texture = loadTexture("assets/pixel_ship.png", app.renderer);
 
+    memset(&bullet, 0, sizeof(Entity));
+    bullet.rect = &rectB;
+    bullet.texture = loadTexture("assets/pixel_laser_red.png", app.renderer);
+
 
     while (1) {
 
         prepareScene(app.renderer);
+        drawText(app.renderer);
 
         doInput(&app, &player);
 
+        player.rect->x += player.dx;
+        player.rect->y += player.dy;
+
         movement(&app, player.rect, &(player.speed));
 
-        drawText(app.renderer);
+
+        if (app.fire && bullet.health == 0) {
+            bullet.rect->x = player.rect->x;
+            bullet.rect->y = player.rect->y;
+            bullet.dx = 16;
+            bullet.dy = 0;
+            bullet.health = 1;
+        }
+
+        bullet.rect->x += bullet.dx;
+        bullet.rect->y += bullet.dy;
+
+
+        if (bullet.rect->x > SCREEN_WIDTH) {
+            bullet.health = 0;
+        }
+
+
         drawToScreen(player.texture, player.rect, app.renderer);
+
+
+        if (bullet.health > 0) {
+            drawToScreen(bullet.texture, bullet.rect, app.renderer);
+        }
+
 
         presentScene(app.renderer);
 
@@ -58,6 +97,7 @@ int main(int argc, char* argv[]) {
 
 
     cleanUp(&player, app.window, app.renderer);
+    free(&bullet);
 
 
     return 0;

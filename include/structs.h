@@ -11,6 +11,7 @@ typedef struct {
     int down;
     int left;
     int right;
+    int fire;
 } App;
 
 typedef struct {
@@ -18,7 +19,9 @@ typedef struct {
     SDL_Texture* texture;
     SDL_Rect* rect;
     int speed;
-    int speedDt;
+    int dx;
+    int dy;
+    int health;
 } Entity;
 
 typedef struct {

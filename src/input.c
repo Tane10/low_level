@@ -28,6 +28,9 @@ void doKeyDown(SDL_KeyboardEvent* event, App* app, int* speed) {
             *speed = 10;
             break;
 
+        case SDL_SCANCODE_SPACE:
+            app->fire = 1;
+            break;
         default:
             break;
 
@@ -60,6 +63,9 @@ void doKeyUp(SDL_KeyboardEvent* event, App* app, int* speed) {
             *speed = 4;
             break;
 
+        case SDL_SCANCODE_SPACE:
+            app->fire = 0;
+            break;
         default:
             break;
 
@@ -80,6 +86,11 @@ void doInput(App* app, Entity* entity) {
             break;
 
         case SDL_KEYDOWN:
+            // quick exit
+            if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+                exit(0);
+            }
+
             doKeyDown(&event.key, app, &(entity->speed));
             break;
 
