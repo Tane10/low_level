@@ -5,11 +5,12 @@
 #include "structs.h"
 #include "movement.h"
 #include "text.h"
+#include "defs.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_video.h>
-#include <defs.h>
+
 
 void cleanUp(Entity* ent, SDL_Window* window, SDL_Renderer* ren) {
     SDL_DestroyTexture(ent->texture);
@@ -20,9 +21,10 @@ void cleanUp(Entity* ent, SDL_Window* window, SDL_Renderer* ren) {
     SDL_Quit();
 }
 
+void static logic(void) {}
+
 
 int main(int argc, char* argv[]) {
-    App app;
 
     Entity player;
     Entity bullet;

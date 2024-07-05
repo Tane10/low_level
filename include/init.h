@@ -1,9 +1,6 @@
-#include "structs.h"
-
-
 #ifndef INIT_H
 #define INIT_H
 
-void initSDL(App* app);
+void initSDL();
 
 #endif

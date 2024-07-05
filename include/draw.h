@@ -1,9 +1,8 @@
-#include "structs.h"
-#include "SDL2/SDL_render.h"
-
 #ifndef DRAW_H
 #define DRAW_H
 
+#include "structs.h"
+#include <SDL2/SDL_render.h>
 
 void prepareScene(SDL_Renderer* renderer);
 
