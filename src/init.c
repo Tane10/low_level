@@ -1,5 +1,6 @@
 #include "init.h"
 #include "defs.h"
+#include "globals.h"
 #include "structs.h"
 
 #include <SDL2/SDL.h>

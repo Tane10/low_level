@@ -6,6 +6,8 @@
 #include "movement.h"
 #include "text.h"
 #include "defs.h"
+#include "globals.h"
+
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>

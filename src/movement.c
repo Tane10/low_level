@@ -1,3 +1,5 @@
+#include "globals.h"
+
 #include <SDL2/SDL_video.h>
 #include <structs.h>
 #include <SDL2/SDL_log.h>
@@ -43,7 +45,7 @@ CollisionMap* hasCollidedWithBorder(SDL_Window* window, SDL_Rect* entityRect) {
 
 
 
-void movement(App* app, SDL_Rect* entityRect, int* speed) {
+void movement(SDL_Rect* entityRect, int* speed) {
 
     CollisionMap* collided = hasCollidedWithBorder(app->window, entityRect);
 

@@ -1,5 +1,6 @@
 #include "input.h"
 #include "structs.h"
+#include "globals.h"
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_log.h>

@@ -2,6 +2,7 @@
 #include "structs.h"
 #include "draw.h"
 #include "defs.h"
+#include "globals.h"
 
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_log.h>
