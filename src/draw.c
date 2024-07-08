@@ -1,4 +1,6 @@
 #include "draw.h"
+#include  "globals.h"
+#include "stage.h"
 #include "SDL2/SDL_render.h"
 #include <SDL2/SDL_log.h>
 #include <SDL2/SDL_image.h>
@@ -43,5 +45,23 @@ void drawToScreen(SDL_Texture* texture, SDL_Rect* rect, SDL_Renderer* renderer) 
     // Draw hit box around png
     // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     // SDL_RenderDrawRect(renderer, &dest);
+
+}
+
+static void draw(void) {
+    drawPlayer();
+    drawBullets();
+}
+
+static void drawPlayer(void) {
+    Entity* player = getPlayer();
+    drawToScreen(player->texture, player->rect, app.renderer);
+}
+
+static void drawBullets(void) {
+    Entity* b;
+    for (b = stage.bulletHead.next; b != NULL; b = b->next) {
+        drawToScreen(bulletTexture, b->rect, app.renderer);
+    }
 
 }

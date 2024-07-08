@@ -21,10 +21,6 @@ typedef struct {
 
 // creating an Entity linked-list see struct Entity* next
 typedef struct {
-    float x;
-    float y;
-    int w;
-    int h;
     float dx;
     float dy;
     int health;

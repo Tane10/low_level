@@ -6,5 +6,6 @@
 // global app var
 extern App app;
 extern Stage stage;
+extern SDL_Texture* bulletTexture;
 
 #endif

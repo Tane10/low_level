@@ -7,24 +7,87 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_log.h>
 
+static Entity player;
+
+static void logic() {
+    doPlayer();
+    doBullets();
+}
+
+static void doPlayer(void) {
+    movementHandler();
+}
+
 void initStage(SDL_Renderer* ren) {
 
     app.delegate.logic = logic;
     app.delegate.draw = draw;
 
-    memset(&app.stage, 0, sizeof(Stage));
+    memset(&stage, 0, sizeof(Stage));
 
-    app.stage.fighterTail = &app.stage.fighterHead;
-    app.stage.bulletTail = &app.stage.bulletTail;
+    stage.fighterTail = &stage.fighterHead;
+    stage.bulletTail = stage.bulletTail;
 
-    initPlayer(&app.stage);
+    initPlayer(&stage, ren);
 
-    SDL_Texture* bulletTexture = loadTexture("assets/pixel_laser_red.png", ren);
+    bulletTexture = loadTexture("assets/pixel_laser_red.png", ren);
 }
 
 
-static void initPlayer(Stage* stage, SDL_Renderer* ren) {
 
+static void fireBullet(void) {
+    Entity* bullet;
+
+    bullet = malloc(sizeof(Entity));
+
+    memset(bullet, 0, sizeof(Entity));
+
+    stage.bulletTail->next = bullet;
+    stage.bulletTail = bullet;
+
+    bullet->rect->x = player.rect->x;
+    bullet->rect->y = player.rect->y;
+    bullet->dx = PLAYER_BULLET_SPEED;
+    bullet->health = 1;
+
+    bullet->texture = bulletTexture;
+
+
+    if (SDL_QueryTexture(bullet->texture, NULL, NULL, &bullet->rect->w, &bullet->rect->h) != 0) {
+        printf("Failed to get texture attrs: %s \n", SDL_GetError());
+    }
+
+    bullet->rect->y += (player.rect->h / 2) - (bullet->rect->h / 2);
+}
+
+static void doBullets() {
+    Entity* b, * prev;
+
+    prev = &stage.bulletHead;
+
+    for (b = stage.bulletHead.next; b != NULL; b = b->next) {
+        b->rect->x += b->dx;
+        b->rect->y += b->dy;
+
+        if (b->rect->x > SCREEN_WIDTH) {
+            if (b == stage.bulletTail) {
+                stage.bulletTail = prev;
+
+            }
+
+            prev->next = b->next;
+            free(b);
+            b = prev;
+        }
+
+        prev = b;
+    }
+
+}
+
+
+// Player setter
+Entity* initPlayer(Stage* stage, SDL_Renderer* ren) {
     Entity* player = malloc(sizeof(Entity));
 
     if (player == NULL) {
@@ -34,17 +97,27 @@ static void initPlayer(Stage* stage, SDL_Renderer* ren) {
 
     memset(player, 0, sizeof(Entity));
 
+    // set 1st node in linked list to be player
     stage->fighterTail->next = player;
     stage->fighterTail = player;
 
-    player->x = 100;
-    player->x = 100;
+    // Set inital player values including texture
+    player->rect->y = 100;
+    player->rect->x = 100;
+    player->rect->w = 50;
+    player->rect->h = 50;
+
     player->texture = loadTexture("assets/pixel_ship.png", ren);
 
-    if (SDL_QueryTexture(player->texture, NULL, NULL, &player->w, &player->h) != 0) {
+    if (SDL_QueryTexture(player->texture, NULL, NULL, &player->rect->w, &player->rect->h) != 0) {
         printf("Failed to get texture attrs: %s \n", SDL_GetError());
     }
 
+    return player;
+}
 
 
+// Player getter
+Entity* getPlayer(void) {
+    return &player;
 }

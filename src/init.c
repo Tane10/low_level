@@ -9,7 +9,7 @@
 
 
 
-void initSDL() {
+void initSDL(void) {
     // IMG_Init(IMG_INIT_PNG);
 
     int renderFlags, windowFlags;

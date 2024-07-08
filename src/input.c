@@ -6,14 +6,14 @@
 #include <SDL2/SDL_log.h>
 
 
-void doKeyDown(SDL_KeyboardEvent* event) {
+void keyDownHandler(SDL_KeyboardEvent* event) {
     if (event->repeat == 0 && event->keysym.scancode < MAX_KEYBOARD_KEYS) {
         app.keyboard[event->keysym.scancode] = 1;
     }
 
 }
 
-void doKeyUp(SDL_KeyboardEvent* event) {
+void keyUpHandler(SDL_KeyboardEvent* event) {
     if (event->repeat == 0 && event->keysym.scancode < MAX_KEYBOARD_KEYS) {
         app.keyboard[event->keysym.scancode] = 0;
     }
@@ -21,7 +21,7 @@ void doKeyUp(SDL_KeyboardEvent* event) {
 }
 
 
-void doInput(Entity* entity) {
+void inputHandler(void) {
     SDL_Event event;
 
     while (SDL_PollEvent(&event)) {
@@ -36,11 +36,11 @@ void doInput(Entity* entity) {
                 exit(0);
             }
 
-            doKeyDown(&event.key);
+            keyDownHandler(&event.key);
             break;
 
         case SDL_KEYUP:
-            doKeyUp(&event.key);
+            keyUpHandler(&event.key);
             break;
 
         default:

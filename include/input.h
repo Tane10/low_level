@@ -6,7 +6,7 @@
 
 
 
-void doInput(Entity* entity);
+void doInput(void);
 
 void doKeyDown(SDL_KeyboardEvent* event);
 

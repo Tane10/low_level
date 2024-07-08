@@ -6,6 +6,17 @@
 
 void initStage(SDL_Renderer* ren);
 
-static void initPlayer(Stage* stage, SDL_Renderer* ren);
+Entity* initPlayer(Stage* stage, SDL_Renderer* ren);
+
+static void logic(void);
+
+static void doPlayer(void);
+
+static void doBullets(void);
+
+static void fireBullets(void);
+
+Entity* getPlayer(void);
+
 
 #endif

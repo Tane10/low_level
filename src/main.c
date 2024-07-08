@@ -7,6 +7,7 @@
 #include "text.h"
 #include "defs.h"
 #include "globals.h"
+#include "stage.h"
 
 
 #include <SDL2/SDL.h>
@@ -27,81 +28,85 @@ void static logic(void) {}
 
 
 int main(int argc, char* argv[]) {
+    // Entity player;
+    // Entity bullet;
 
-    Entity player;
-    Entity bullet;
-
-    SDL_Rect rect;
-    SDL_Rect rectB;
+    long then;
+    float remainder;
 
     //TODO: Clean up this entity stuff 
 
     memset(&app, 0, sizeof(App));
 
-    initSDL(&app);
+    initSDL();
 
-    // init player
-    memset(&player, 0, sizeof(Entity));
-    player.rect = &rect;
-    player.rect->x = 100;
-    player.rect->y = 100;
-    player.rect->w = 50;
-    player.rect->h = 50;
-    player.speed = 4;
+    initStage(app.renderer);
 
-    player.texture = loadTexture("assets/pixel_ship.png", app.renderer);
+    then = SDL_GetTicks;
 
-    memset(&bullet, 0, sizeof(Entity));
-    bullet.rect = &rectB;
-    bullet.texture = loadTexture("assets/pixel_laser_red.png", app.renderer);
+    remainder = 0;
+
+    // memset(&bullet, 0, sizeof(Entity));
+    // bullet.rect = &rectB;
+    // bullet.texture = loadTexture("assets/pixel_laser_red.png", app.renderer);
 
 
     while (1) {
 
         prepareScene(app.renderer);
+
+        // drawing controls to screen
         drawText(app.renderer);
 
-        doInput(&app, &player);
+        doInput();
 
-        player.rect->x += player.dx;
-        player.rect->y += player.dy;
+        app.delegate.logic();
 
-        movement(&app, player.rect, &(player.speed));
-
-
-        if (app.fire && bullet.health == 0) {
-            bullet.rect->x = player.rect->x;
-            bullet.rect->y = player.rect->y;
-            bullet.dx = 16;
-            bullet.dy = 0;
-            bullet.health = 1;
-        }
-
-        bullet.rect->x += bullet.dx;
-        bullet.rect->y += bullet.dy;
-
-
-        if (bullet.rect->x > SCREEN_WIDTH) {
-            bullet.health = 0;
-        }
-
-
-        drawToScreen(player.texture, player.rect, app.renderer);
-
-
-        if (bullet.health > 0) {
-            drawToScreen(bullet.texture, bullet.rect, app.renderer);
-        }
-
+        app.delegate.draw();
 
         presentScene(app.renderer);
 
-        SDL_Delay(16);
+        // CAP FRAME RATE
+
+        // player.rect->x += player.dx;
+        // player.rect->y += player.dy;
+
+        // movement(&app, player.rect, &(player.speed));
+
+
+        // if (app.fire && bullet.health == 0) {
+        //     bullet.rect->x = player.rect->x;
+        //     bullet.rect->y = player.rect->y;
+        //     bullet.dx = 16;
+        //     bullet.dy = 0;
+        //     bullet.health = 1;
+        // }
+
+        // bullet.rect->x += bullet.dx;
+        // bullet.rect->y += bullet.dy;
+
+
+        // if (bullet.rect->x > SCREEN_WIDTH) {
+        //     bullet.health = 0;
+        // }
+
+
+        // drawToScreen(player.texture, player.rect, app.renderer);
+
+
+        // if (bullet.health > 0) {
+        //     drawToScreen(bullet.texture, bullet.rect, app.renderer);
+        // }
+
+
+        // presentScene(app.renderer);
+
+        // SDL_Delay(16);
     }
 
 
-    cleanUp(&player, app.window, app.renderer);
-    free(&bullet);
+    // cleanUp(&player, app.window, app.renderer);
+    // free(&bullet);
 
 
     return 0;
