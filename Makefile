@@ -8,6 +8,8 @@ clean:
 	rm game
 
 debug:
-	gdb ./game
+	# start in tui mode i.e. view the code running not machine code
+	#gdb -tui ./game
+	gdb -tui ./game
 
 	

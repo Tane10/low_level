@@ -1,5 +1,5 @@
 #include "draw.h"
-#include  "globals.h"
+#include "globals.h"
 #include "stage.h"
 #include "SDL2/SDL_render.h"
 #include <SDL2/SDL_log.h>
@@ -25,7 +25,7 @@ SDL_Texture* loadTexture(char* filename, SDL_Renderer* renderer) {
     texture = IMG_LoadTexture(renderer, filename);
 
     if (!texture) {
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to load texture %s: %s", filename, IMG_GetError());
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "loadTexture:\n Failed to load texture %s: %s", filename, IMG_GetError());
     }
 
     return texture;
@@ -34,11 +34,11 @@ SDL_Texture* loadTexture(char* filename, SDL_Renderer* renderer) {
 void drawToScreen(SDL_Texture* texture, SDL_Rect* rect, SDL_Renderer* renderer) {
 
     if (SDL_QueryTexture(texture, NULL, NULL, &rect->w, &rect->h) != 0) {
-        printf("Failed to get texture attrs: %s \n", SDL_GetError());
+        printf("drawToScreen/SDL_QueryTexture:\n Failed to get texture attrs: %s \n", SDL_GetError());
     }
 
     if (SDL_RenderCopy(renderer, texture, NULL, rect) != 0) {
-        printf("Failed to display texture: %s \n", SDL_GetError());
+        printf("drawToScreen/SDL_RenderCopy:\n Failed to display texture: %s \n", SDL_GetError());
         // Failed to display texture: Invalid texture  ^
     }
 
@@ -48,20 +48,3 @@ void drawToScreen(SDL_Texture* texture, SDL_Rect* rect, SDL_Renderer* renderer) 
 
 }
 
-static void draw(void) {
-    drawPlayer();
-    drawBullets();
-}
-
-static void drawPlayer(void) {
-    Entity* player = getPlayer();
-    drawToScreen(player->texture, player->rect, app.renderer);
-}
-
-static void drawBullets(void) {
-    Entity* b;
-    for (b = stage.bulletHead.next; b != NULL; b = b->next) {
-        drawToScreen(bulletTexture, b->rect, app.renderer);
-    }
-
-}

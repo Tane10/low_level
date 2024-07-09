@@ -1,7 +1,9 @@
 #include "globals.h"
+#include "stage.h"
+#include "movement.h"
+#include "structs.h"
 
 #include <SDL2/SDL_video.h>
-#include <structs.h>
 #include <SDL2/SDL_log.h>
 #include <SDL2/SDL_scancode.h>
 
@@ -45,44 +47,43 @@ CollisionMap* hasCollidedWithBorder(SDL_Window* window, SDL_Rect* entityRect) {
 }
 
 
-
-void movementHandler() {
+void movementHandler(void) {
     Entity* player = getPlayer();
 
-    CollisionMap* collided = hasCollidedWithBorder(app.window, player->rect);
-
+    // add in later
+    // CollisionMap* collided = hasCollidedWithBorder(app.window, player->rect);
 
     if (app.keyboard[SDL_SCANCODE_UP]) {
-        if (!collided->top) {
-            player->rect->y -= PLAYER_SPEED;
-        }
+        // if (!collided->top) {
+        player->rect->y -= PLAYER_SPEED;
+        // }
     }
 
     if (app.keyboard[SDL_SCANCODE_DOWN]) {
-        if (!collided->bottom) {
-            player->rect->y += PLAYER_SPEED;
-        }
+        // if (!collided->bottom) {
+        player->rect->y += PLAYER_SPEED;
+        // }
     }
 
     if (app.keyboard[SDL_SCANCODE_RIGHT]) {
-        if (!collided->right) {
-            player->rect->x += PLAYER_SPEED;
-        }
+        // if (!collided->right) {
+        player->rect->x += PLAYER_SPEED;
+        // }
     }
 
     if (app.keyboard[SDL_SCANCODE_LEFT]) {
-        if (!collided->left) {
-            player->rect->x -= PLAYER_SPEED;
-        }
+        // if (!collided->left) {
+        player->rect->x -= PLAYER_SPEED;
+        // }
     }
 
     if (app.keyboard[SDL_SCANCODE_SPACE]) {
         fireBullets();
     }
 
-    free(collided);
+    // free(collided);
 
-    player->rect->x += player->dx;
-    player->rect->y += player->dy;
+    // player->rect->x += player->dx;
+    // player->rect->y += player->dy;
 
 }

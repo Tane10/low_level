@@ -12,10 +12,5 @@ SDL_Texture* loadTexture(char* filename, SDL_Renderer* renderer);
 
 void drawToScreen(SDL_Texture* texture, SDL_Rect* rect, SDL_Renderer* renderer);
 
-static void draw(void);
-
-static void drawPlayer(void);
-
-static void drawBullets(void);
 
 #endif

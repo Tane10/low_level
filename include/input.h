@@ -6,11 +6,11 @@
 
 
 
-void doInput(void);
+void inputHandler(void);
 
-void doKeyDown(SDL_KeyboardEvent* event);
+void keyDownHandler(SDL_KeyboardEvent* event);
 
-void doKeyUp(SDL_KeyboardEvent* event);
+void keyUpHandler(SDL_KeyboardEvent* event);
 
 
 #endif

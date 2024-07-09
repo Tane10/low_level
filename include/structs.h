@@ -20,7 +20,7 @@ typedef struct {
 } App;
 
 // creating an Entity linked-list see struct Entity* next
-typedef struct {
+typedef struct Entity {
     float dx;
     float dy;
     int health;

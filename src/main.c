@@ -24,15 +24,13 @@ void cleanUp(Entity* ent, SDL_Window* window, SDL_Renderer* ren) {
     SDL_Quit();
 }
 
-void static logic(void) {}
-
 
 int main(int argc, char* argv[]) {
     // Entity player;
     // Entity bullet;
 
-    long then;
-    float remainder;
+    // Uint32* then;
+    // float remainder;
 
     //TODO: Clean up this entity stuff 
 
@@ -42,9 +40,9 @@ int main(int argc, char* argv[]) {
 
     initStage(app.renderer);
 
-    then = SDL_GetTicks;
+    // then = SDL_GetTicks;
 
-    remainder = 0;
+    // remainder = 0;
 
     // memset(&bullet, 0, sizeof(Entity));
     // bullet.rect = &rectB;
@@ -58,7 +56,7 @@ int main(int argc, char* argv[]) {
         // drawing controls to screen
         drawText(app.renderer);
 
-        doInput();
+        inputHandler();
 
         app.delegate.logic();
 

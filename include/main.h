@@ -8,6 +8,4 @@ int main(int argc, char* argv[]);
 
 void cleanUp(Entity* ent, SDL_Window* window, SDL_Renderer* ren);
 
-static void logic();
-
 #endif
