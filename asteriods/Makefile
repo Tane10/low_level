@@ -4,8 +4,8 @@ build:
 build-mac:
 	gcc -Wall -std=c99 -Iinclude -I/opt/homebrew/include -L/opt/homebrew/lib ./src/*.c -lSDL2 -lSDL2_image -lSDL2_ttf -o game -g
 
-debug-mac:
-	gcc -Wall -std=c99 -Iinclude -I/opt/homebrew/include -L/opt/homebrew/lib ./src/*.c -lSDL2 -lSDL2_image -lSDL2_ttf -o game  -Og -ggdb3 -fsanitize=address∆∆
+build-debug-mac:
+	gcc -Wall -std=c99 -Iinclude -I/opt/homebrew/include -L/opt/homebrew/lib ./src/*.c -lSDL2 -lSDL2_image -lSDL2_ttf -o game  -Og -ggdb3 -fsanitize=address
 	
 build-debug:
 	gcc -Wall -std=c99 -Iinclude ./src/*.c -lSDL2 -lSDL2_image -lSDL2_ttf -o game -Og -ggdb3 -fsanitize=address
@@ -18,3 +18,5 @@ clean:
 
 debug:
 	gdb ./game
+debug-mac:
+	lldb ./game

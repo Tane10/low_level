@@ -54,4 +54,4 @@ dkms.conf
 game
 .vscode
 .clang-format
-
+.idea
